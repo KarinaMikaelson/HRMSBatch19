@@ -1,0 +1,72 @@
+CLASS - 1
+-----------------------
+Cucumber - is a tool:
+Gherkin - is a language
+     BDD - behavioral-driven development
+
+Group ID (When creating a new Project):
+          Example: org.amazon ( organization name)
+Artifact ID:
+          Example: aws ( name of the project)
+src (source):
+   main -
+   test -
+
+   delete main folder because we don't need it
+
+   in test we have:
+                1. java - for technical stuff
+                2. resources - for non-technical stuff
+
+We added 6 dependencies:
+  NOW WE HAVE: java, selenium,  cucumber, apache, common io
+  -----------------------------------------------------------
+  Scenario BDD
+              - The file where we write BDD scenarios, we call it feature file
+Steps:
+     1. we create "features" directory inside "resources" directory (non-java packages called "directory")
+     ---> 2. create file called "Login.feature"
+     - in one User Story - we have multiple test cases
+                           similarly, in one feature file, we write multiple scenarios for that user story
+------------------
+  TASK:
+   Add Employee
+      RULES of Steps: Dont add any space or any char after implementing step definition
+                      don write duplicate step def, just one step definition should exist you can call
+                      steps in feature multiple times, but in back-end there should be only one step definition
+
+
+we have scenarios written in feature file
+we have step definitions in steps classes
+
+all test scenarios are executing properly
+
+we are calling methods from common methods class
+we are using selenium webDriver from common methods class
+
+runner class - it is considered as the most important class of cucumber
+
+3 important classes in
+     feature file
+     step definition
+     runner class - we can execute all of the scenarios, some of the scenarios, one of the scenarios from this class
+                    we can generate all the step definitions in just one click we can generate reports also from this
+                    class we can separate scenarios also from this class
+
+
+
+---------------------------------------------
+Benefits of BDD:
+         Collaboration:
+
+                This process involves multiple stakeholders and their understanding of the project.
+                Having all the stakeholders involved from the beginning and throughout the process
+                fosters strong communication and engage in the product development cycle.
+         Focus on End Users:
+                BDD puts the customer's vision in mind first. BDD focuses on the user's view on how
+                the application should behave. By focusing on the user's view, this takes out the
+                "what-ifs" from all the different stakeholders to deliver the product in a shorter software
+         Business Values:
+                Implementing BDD automates redundant processes and creates structured scenarios by writing
+                test scenarios in an easily-decipherable language - Gherkin. Eliminating lag time in between
+                processes means that businesses can focus on client priorities and deliver results faster.
