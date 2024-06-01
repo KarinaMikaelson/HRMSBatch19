@@ -1,5 +1,13 @@
 CLASS - 1
 -----------------------
+STEPS to create a test:
+       1. Create a feature and Write Steps in "features" using tags
+       2. in Runner Class write:
+                            dryRun = true,
+                            tags = "@tagName"
+       3. Create steps in "steps" directory to write a code for a new steps
+       4.
+-----------------------
 Cucumber - is a tool:
 Gherkin - is a language
      BDD - behavioral-driven development
@@ -49,9 +57,224 @@ runner class - it is considered as the most important class of cucumber
 3 important classes in
      feature file
      step definition
-     runner class - we can execute all of the scenarios, some of the scenarios, one of the scenarios from this class
-                    we can generate all the step definitions in just one click we can generate reports also from this
-                    class we can separate scenarios also from this class
+
+     runner class:
+                 we can execute all of the scenarios, some of the scenarios, one of the scenarios from this class
+                 we can generate all the step definitions in just one click
+                 we can generate reports also from this class
+                 we can separate scenarios also from this class
+
+--------------------------------------------------------------------------------------------
+CLASS-2
+----------------------------------------------
+RECAP:
+    Cucumber:
+             1. "feature" file in which we write all the scenarios
+             2. "Step Definition Class", where all the step definitions are available
+             3. "Runner Class" - all the test cases we execute from Runner Class:
+                           glue="steps" - here in glue, we provide the name of the steps package. Runner class will search all the step definitions inside this package
+                           dryRun=false(or true) - when we set the value of dryRun = true:
+                                                 - it stops the actual execution and scans all the step definitions
+                                                 - if the step def is missing in any of the class, then it will give you that  missing step def.
+                                                 - if all the step def are there, it will provide green tick
+                                                 - set the value of dryRun=false - to start the actual execution after implementing the missing step
+    maven project:
+         artifact ID - project name
+         group ID - company name
+
+    main - development:
+    test - to test the application
+    test --> java and resources - for all technical part we need "java" and for all non-tech part we need "resources"
+
+Class-2:
+    "features" --> Background
+              "Background" -  allows us to write all duplicate steps in one feature file till the time flow is not broken at one place
+                   - Once the flow is broken, we cannot write steps in background
+                   - One background is applicable for one feature file it means for every feature file background will be different
+
+              Grouping Scenarios:
+                   TAGS:
+                        = if we need to execute specific scenarios, we use tag name here
+                        - We can add multiple tags to one scenario (in RunnerClass, over Scenario)
+                               Ex:  @smoke
+                                    Scenario ...
+                                       Given ...
+                        - we can give any name to the tag like: test type, name, sprint number etc.
+                               Ex: @regression @sprint3 @sabina
+                               Ex-2: tags = "@karina or @sabina"
+                                     tags = "@karina and @sabina"
+Hooks:
+    - in cucumber, hooks we use to mention pre-condition and post condition of the complete project.
+    - It means for all the feature files, we have common pre-condition and post condition such as opening the browser and closing the browser
+        RULE: Hooks class will be implemented under steps package
+
+Background vs hooks:
+             HOOKS
+                   - hooks are applicable for complete project (all feature files)
+                   - in Hooks we keep only pre-conditions and post conditions of the entire project
+             BACKGROUND
+                   - background is applicable only for one feature file
+                   - in background we keep all the common steps for one feature file
+
+Data driven testing:
+             - when your one test case executes against multiple sets of data
+--------------------------------------------------------------------------------------------
+CLASS - 3
+----------------------------------------------
+Recap:
+     Background is:
+            - in one feature file, if we have some steps which are common across all the scenarios
+              then we can write them in background but only till the point where flow is not broken.
+            - background is applicable only for one feature file, for every feature file, background
+              will be different
+
+     hooks:
+            - before and after - pre-condition and post condition
+            - hooks class will always be under steps package
+
+     tags:
+            - in order to execute scenarios/test cases in group, we use tags
+
+     Data we write in the test:
+            - hard coded data - it is strictly prohibited
+            - data should be parameterized - scripts should be generic
+
+     feature file:
+            - from feature file, we can pass the data in scenario itself.
+            - this type of scenario will be applicable to implement for just one data set
+
+     scripts:
+            - should be generic, it should be data driven testing
+                       Example:
+                            @cucumber
+                              Scenario: Adding employee from feature file
+                                When user enters "Sheila" , "MS" and "Bangal"
+     driven testing:
+            - when one script executes against multiple sets of data, then we call it data driven testing
+            - in order to implement DDT in cucumber, we use scenario outline with examples table
+                       Example:
+                            @ddt
+                              Scenario Outline: : Adding employees using data driven testing
+                                When user enters "<firstName>" and "<middleName>" and "<lastName>".
+                                And user clicks on save button
+                                Then employee added successfully
+                                Examples:
+                                  | firstName | middleName | lastName |
+                                  |Fouad      |MS          |Oliinyk   |
+                                  |Matt       |MS          |Aslloun   |
+                                  |Lali       |MS          |Shahad    |
+
+     Page object model design pattern:
+                         - we create object repository of every page in individual class
+--------------------------------------------------------------------------------------------
+Review class -
+----------------------------------
+Cucumber - as a tool
+              BDD approach - behavioral driven development approach:
+                                        given - pre-condition
+                                        when - to perform actions (click, send keys, drag and drop, dropdown etc)
+                                        then - expected result
+                                        and -  supporting tag that can be used with given, when, then
+
+              maven project:
+                          - build tool - it makes my project as a single build
+
+              configuration file - pom.xml (dependencies, plugins, run the code)
+
+              Scenario:
+                          - we wrote scenarios in project
+                          - every single test case will be considered as one scenario
+                          - we use feature file to write scenarios -
+
+1. feature file
+2. step definition class
+3. runner class
+
+            - hooks - pro condition and post condition -
+            - user story - Employee search
+
+Background:
+Given user is navigated to HRMS application
+    When user enters valid username and password
+    And user clicks on login button
+    Then user is successfully logged in
+    When user clicks on PIM option
+    And user clicks on employee list option
+
+Scenario - search employee by id
+    When user enters valid employee id
+    And user clicks on search button
+    Then user see the employee information
+
+
+Scenario - search employee by name
+    When user enters valid employee name
+    And user clicks on search button
+    Then user see the employee information
+
+Hooks - in hooks, we implement pre condition and post condition
+
+pre-condition - opening the browser and launching the application
+post-condition - close the browser
+
+Rule - hooks will be implemented in steps package
+
+@Before - is pre-condition
+@After - is post-condition
+
+difference in between hooks and background
+
+background is applicable for one feature file
+hooks are applicable for entire project
+
+we dont pass hard coded data in framework
+cucumber allows me to pass data from feature file
+
+my script should run against multiple sets of data
+in order to achieve data driven testing
+
+page object model design pattern
+
+for every screen in the application, you create a page class for this screen and
+keep all the locators (object repository) in it. to maintain the code reusability
+and management
+
+in page class, we use @find by annotation to locate the elements
+we call them object repository
+
+to initialize all the elements, we use constructor because contructor has been called
+automatically when the object has been created.
+
+in constructor, we call page factory and init elements
+
+to utilize all page classes, we implement page initializer class
+we are calling this class in common methods class so that it can be called
+everywhere.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -70,3 +293,4 @@ Benefits of BDD:
                 Implementing BDD automates redundant processes and creates structured scenarios by writing
                 test scenarios in an easily-decipherable language - Gherkin. Eliminating lag time in between
                 processes means that businesses can focus on client priorities and deliver results faster.
+

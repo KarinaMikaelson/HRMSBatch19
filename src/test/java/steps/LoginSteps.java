@@ -5,17 +5,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import utils.CommonMethods;
 import utils.ConfigReader;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class LoginSteps extends CommonMethods {
-    @Given("user is navigated to HRMS application")
-    public void user_is_navigated_to_hrms_application() throws IOException {
-        openBrowserAndLaunchApplication();
-    }
+
 
     @When("user enters valid username and password")
     public void user_enters_valid_username_and_password() throws IOException {
