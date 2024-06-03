@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
-public class CommonMethods {
+public class CommonMethods extends PageInitializer{
     public static WebDriver driver;
     public static void openBrowserAndLaunchApplication() throws IOException {
 
@@ -38,6 +38,7 @@ public class CommonMethods {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.manage().window().maximize();
         driver.get(ConfigReader.read("url"));
+        initializePageObjects();
     }
 
     //----------------------------------------------------------Close Browser Method
