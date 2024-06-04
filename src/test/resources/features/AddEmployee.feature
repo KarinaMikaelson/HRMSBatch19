@@ -31,3 +31,14 @@ Feature: Adding employees using different techniques
       |Matt       |MS          |Aslloun   |
       |Lali       |MS          |Shahad    |
 
+  @datatable
+  Scenario: Adding multiple employees using data table
+    When user enters firstname and middlename and lastname from data table and verify it
+      |firstName |middleName |lastName|
+      |Aleni     |MS         |Hina    |
+      |Dina      |MS         |Euston  |
+      |Joe       |MS         |Andi    |
+
+  @excel
+  Scenario: Adding employees from excel file
+    When user adds multiple employee from excel and validate them
