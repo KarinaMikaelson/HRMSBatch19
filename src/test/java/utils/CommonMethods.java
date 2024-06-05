@@ -1,38 +1,47 @@
 package utils;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 public class CommonMethods extends PageInitializer{
     public static WebDriver driver;
-    public static void openBrowserAndLaunchApplication() throws IOException {
-
-//------------------------------------------------------Open Browser Method
+    public void openBrowserAndLaunchApplication() throws IOException {
         switch (ConfigReader.read("browser")){
+
             case "Chrome":
-                driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                driver=new ChromeDriver(options);
                 break;
             case "FireFox":
-                driver = new FirefoxDriver();
+                driver=new FirefoxDriver();
                 break;
             case "Edge":
                 driver = new EdgeDriver();
                 break;
+            case "Safari":
+                driver = new SafariDriver();
+                break;
             default:
-                throw new RuntimeException("invalid Browser Name");
+                throw new RuntimeException("Invalid Browser Name");
         }
         // implicit wait
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -42,7 +51,7 @@ public class CommonMethods extends PageInitializer{
     }
 
     //----------------------------------------------------------Close Browser Method
-    public static void closeBrowser() throws IOException {
+    public static void closeBrowser() {
         if(driver!=null){
             driver.quit();
         }
@@ -82,12 +91,43 @@ public class CommonMethods extends PageInitializer{
         element.click();
     }
     //----------------------------------------------------------- Take Screenshot Common Method
+    public static byte[] takeScreenshot(String fileName){
+
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
+        //it is not going to take another screenshot, instead it will consider picByte
+        //i.e array of byte as a source file for transfer
+        File sourceFile = ts.getScreenshotAs(OutputType.FILE); // sourceFile - transfers file internally
+
+        try {
+            FileUtils.copyFile(sourceFile, new File
+                    (Constants.SCREENSHOT_FILEPATH+fileName+
+                            " "+ getTimeStamp("yyyy-MM-dd-HH-mm-ss")+".png")); //array of byte
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return picBytes;  // returning array of byte
+    }
+    public static String getTimeStamp(String pattern){
+
+        Date date = new Date();
+        //yyyy-MM-dd-hh-mm-ss
+        //dd-MM-yyyy-mm-hh-ss
+        //to get the date in my acceptable format, i need to format it
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+
+        return sdf.format(date);
+
+    }
+    /*
     public static void takeScreenshot(WebDriver driver, String filePath) throws IOException {
-        TakesScreenshot screenshotTaker = (TakesScreenshot)driver;
+    TakesScreenshot screenshotTaker = (TakesScreenshot)driver;
         File srcFile = screenshotTaker.getScreenshotAs(OutputType.FILE);
         File destFile = new File(filePath);
         FileHandler.copy(srcFile,destFile);
     }
+     */
+
 //-----------------------------------------------------------Click Checkbox Method
 
 //-----------------------------------------------------------Radiobutton Method

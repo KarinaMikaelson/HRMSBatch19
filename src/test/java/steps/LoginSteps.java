@@ -42,6 +42,6 @@ public class LoginSteps extends CommonMethods {
 
         String actualUrl = driver.getCurrentUrl();
         Assert.assertEquals(expectedUrl,actualUrl);
-        System.out.println("test passed");
+        //System.out.println("test passed");
     }
 }

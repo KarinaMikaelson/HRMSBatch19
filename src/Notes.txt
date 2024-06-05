@@ -431,12 +431,12 @@ Recap:
 ----------------------------------------------------------------------------------------------------
           Class 5 -
 ------------------------------------------------------------
-          recap -
+          RECAP:
 
           data table - when we need to add multiple data sets in single execution, unlike
-          examples table, we implement data table.
+          examples table - we implement data table.
 
-          difference examples table vs data table
+          difference "examples table" VS "data table"
 
           in examples table - hooks execute based on data sets
                               background executes based on data sets
@@ -448,15 +448,15 @@ Recap:
           for data management and maintain confidentiality of data,
           excel file - we pass data from excel file
 
-          list of maps -
-          for each loop, to get one map at one point of time
-          based on keys, we fetch values from excel file via excel reader class
+          list of maps:
+                    -  for each loop, to get one map at one point of time
+                       based on keys, we fetch values from excel file via excel reader class
 
-          assertions -
-          junit -
+          Assertions:
+                 JUnit:
 
-          assert.asserttrue
-          assert.assertequals
+                 Assert.assertTrue
+                 Assert.assertEquals
 
           all types of report you generate in framework will be a part of target folder
 
@@ -471,6 +471,31 @@ Recap:
           which test case failed
           what steps passed
           what steps failed
+----------------------------- Generating REPORTS, Taking screenshots of REPORT in Runner Class, STEPS:
+
+             1. {"pretty"} - keyword in cucumber prints all steps in console which we execute
+             2. "html:target/cucumber.html","json:target/cucumber.json" - to generate the report, we need to mention
+             3. type of report - "html", and location - target/cucumber.json
+             4. run the runner class, then in target directory "cucumber.json" report will automatically be created.
+             5. To open the report -> right click -> open in -> browser -> Chrome (or other b)
+                  We need to take the screenshot of the report:
+               6. In CommonMethods create a screenshot method
+               7. Write a path to this folder in Constants : public static final String SCREENSHOT_FILEPATH = System.getProperty("user.dir")+ "/screenshots/";
+               8. In Hooks, add screenshot method @AfterMethod so it will split passed and failed reports in different folders
+
+----------------------------- Create different RunnerClass for different types of test execution
+Example: @smoke - SmokeRunner
+         @regression - RegressionRunner
+         @failed - FailedRunner   - ONLY for our own use, add to my FRAMEWORK
+
+----------------------------- Create a build to be able to call all RunnerClasses from  pom.xml
+
+ TO RUN the build from pom.xml, go to M - maven , project name (HRMSBatch19) --> Lifecycle --> test
+ Expect:
+          [INFO] BUILD SUCCESS
+                 or
+          [INFO] BUILD FAILED
+
 
 
 

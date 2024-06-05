@@ -20,7 +20,14 @@ import org.junit.runner.RunWith;
 //           - if all the step def are there, it will provide green tick
 //           set the value of dryRun=false - to start the actual execution after implementing the missing step
         dryRun = false,
-        tags = "@luckyCharm"
+        tags = "@luckyCharm",
+        plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
+                "rerun:target/failed.txt"}
+        //     {"pretty"} - keyword in cucumber prints all steps in console which we execute
+        //      "html:target/cucumber.html","json:target/cucumber.json" - to generate the report, we need to mention
+        //      type of report - "html", and location - target/cucumber.json
+        //      run the runner class, then in target directory "cucumber.json" report will automatically be created.
+        //      To open the report -> right click -> open in -> browser -> Chrome (or other b)
 
 )
 public class RunnerClass {

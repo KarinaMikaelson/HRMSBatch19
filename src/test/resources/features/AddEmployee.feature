@@ -8,19 +8,19 @@ Feature: Adding employees using different techniques
     And user clicks on Add Employee option
 
 
-  @addEmployee
+  @addEmployee @regression
   Scenario: Adding an employee in HRMS system
     When user enters firstname and middlename and lastname
     And user clicks on save button
     Then employee added successfully
 
-  @cucumber
+  @cucumber @regression
   Scenario: Adding employee from feature file
     When user enters "Sheila" , "MS" and "Bangal"
     And user clicks on save button
     Then employee added successfully
 
-  @ddt
+  @ddt @regression
   Scenario Outline: : Adding employees using data driven testing
     When user enters "<firstName>" and "<middleName>" and "<lastName>".
     And user clicks on save button
@@ -31,7 +31,7 @@ Feature: Adding employees using different techniques
       |Matt       |MS          |Aslloun   |
       |Lali       |MS          |Shahad    |
 
-  @datatable
+  @datatable @regression
   Scenario: Adding multiple employees using data table
     When user enters firstname and middlename and lastname from data table and verify it
       |firstName |middleName |lastName|
@@ -39,6 +39,6 @@ Feature: Adding employees using different techniques
       |Dina      |MS         |Euston  |
       |Joe       |MS         |Andi    |
 
-  @excel
+  @excel @regression
   Scenario: Adding employees from excel file
     When user adds multiple employee from excel and validate them

@@ -7,7 +7,7 @@ Feature: Employee search related scenarios
     When user clicks on login button
     Then user is successfully logged in
 
-  @employeeSearch @smoke @sprint2 @ana
+  @employeeSearch @regression @smoke @sprint2 @ana
   Scenario: Search employee by id
     When user enters valid employee id
     And user clicks on search button
