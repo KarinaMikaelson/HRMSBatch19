@@ -1,10 +1,8 @@
 package utils;
 
+import io.cucumber.java.et.Ja;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -117,8 +115,17 @@ public class CommonMethods extends PageInitializer{
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 
         return sdf.format(date);
-
     }
+    //----------------------------------------------------------- JS click operation
+    public static JavascriptExecutor getJSExecutor(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return js;
+    }
+    public static void jsClick(WebElement element){
+        getJSExecutor().executeScript("arguments[0].click();",element);
+    }
+
+
     /*
     public static void takeScreenshot(WebDriver driver, String filePath) throws IOException {
     TakesScreenshot screenshotTaker = (TakesScreenshot)driver;

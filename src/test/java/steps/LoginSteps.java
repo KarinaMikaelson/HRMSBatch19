@@ -29,7 +29,8 @@ public class LoginSteps extends CommonMethods {
     @When("user clicks on login button")
     public void user_clicks_on_login_button() {
         //WebElement loginButton = driver.findElement(By.id("btnLogin"));
-        loginPage.loginButton.click();
+        //loginPage.loginButton.click();
+        jsClick(loginPage.loginButton);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
