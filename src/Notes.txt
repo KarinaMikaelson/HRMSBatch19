@@ -539,7 +539,8 @@ Recap:
      install
      package are the phases of maven
 
-     mvn clean test is the command to run from CMD
+     mvn "clean test" is the command to run from CMD , Clean - deletes all the reports, test clean before making commit
+
      mvn test -D cucumber.options="--tags @smoke" to override the tag
 
 
