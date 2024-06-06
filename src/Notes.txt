@@ -474,6 +474,7 @@ Recap:
 
      rerun plugin - it is used to keep all the failed test case path details
      which we pass under failedRunner class to give these test cases second chance
+
      ----------------------------- Generating REPORTS, Taking screenshots of REPORT in Runner Class, STEPS:
 
                   1. {"pretty"} - keyword in cucumber prints all steps in console which we execute
@@ -521,7 +522,7 @@ Recap:
 
      - sometimes, normal click doesn't work in the automation
 
-     logging -
+     logging - This class written by devs is available everywhere, we only copy/paste. It gets all our test cases logs
 
      4 stages/levels of logs:
 
@@ -542,30 +543,8 @@ Recap:
      mvn test -D cucumber.options="--tags @smoke" to override the tag
 
 
------------------------------ Generating REPORTS, Taking screenshots of REPORT in Runner Class, STEPS:
 
-             1. {"pretty"} - keyword in cucumber prints all steps in console which we execute
-             2. "html:target/cucumber.html","json:target/cucumber.json" - to generate the report, we need to mention
-             3. type of report - "html", and location - target/cucumber.json
-             4. run the runner class, then in target directory "cucumber.json" report will automatically be created.
-             5. To open the report -> right click -> open in -> browser -> Chrome (or other b)
-                  We need to take the screenshot of the report:
-               6. In CommonMethods create a screenshot method
-               7. Write a path to this folder in Constants : public static final String SCREENSHOT_FILEPATH = System.getProperty("user.dir")+ "/screenshots/";
-               8. In Hooks, add screenshot method @AfterMethod so it will split passed and failed reports in different folders
 
------------------------------ Create different RunnerClass for different types of test execution
-Example: @smoke - SmokeRunner
-         @regression - RegressionRunner
-         @failed - FailedRunner   - ONLY for our own use, add to my FRAMEWORK
-
------------------------------ Create a build to be able to call all RunnerClasses from  pom.xml
-
- TO RUN the build from pom.xml, go to M - maven , project name (HRMSBatch19) --> Lifecycle --> test
- Expect:
-          [INFO] BUILD SUCCESS
-                 or
-          [INFO] BUILD FAILED
 
 
 

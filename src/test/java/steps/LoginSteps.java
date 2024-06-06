@@ -15,6 +15,10 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class LoginSteps extends CommonMethods {
+    @Given("user is navigated to HRMS application")
+    public void user_is_navigated_to_hrms_application() throws IOException {
+        openBrowserAndLaunchApplication();
+    }
 
 
     @When("user enters valid username and password")
@@ -24,6 +28,18 @@ public class LoginSteps extends CommonMethods {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage.usernameField.sendKeys(ConfigReader.read("userName"));
         loginPage.passwordField.sendKeys(ConfigReader.read("password"));
+    }
+    @When("user enters {string} value and {string} value")
+    public void user_enters_value_and_value(String string, String string2) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage.usernameField.sendKeys("admin");
+        loginPage.passwordField.sendKeys("Hum@nhrm123");
+    }
+    @When("user enters {string} values and {string} values")
+    public void user_enters_values_and_values(String string, String string2) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage.usernameField.sendKeys("admin");
+        loginPage.passwordField.sendKeys("Hum@nhrm123");
     }
 
     @When("user clicks on login button")
