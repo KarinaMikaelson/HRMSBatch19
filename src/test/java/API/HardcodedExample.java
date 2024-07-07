@@ -110,6 +110,7 @@ public class HardcodedExample {
 
     @Test
     public void dgetUpdatedEmployee(){
+        //  GET
         RequestSpecification request = given().
                 header("Content-Type","application/json").
                 header("Authorization", token).
@@ -121,5 +122,36 @@ public class HardcodedExample {
 
         //validate the status code
         response.then().assertThat().statusCode(200);
+    }
+
+    @Test
+    public void egetAllEmployees(){
+        //prepare the request
+        RequestSpecification request = given().
+                header("Content-Type","application/json").
+                header("Authorization", token);
+
+        //hitting the endpoint
+        Response response = request.when().get("/getAllEmployees.php");
+        response.prettyPrint();
+        //validate the status code
+        response.then().assertThat().statusCode(200);
+        response.then().assertThat().header("Connection","Keep-Alive");
+    }
+    @Test
+    public void fgetAllJobTitles(){
+        ///jobTitle.php
+        //prepare the request
+        RequestSpecification request = given().
+                header("Content-Type","application/json").
+                header("Authorization", token);
+
+        //hitting the endpoint
+        Response response = request.when().get("/jobTitle.php");
+        response.prettyPrint();
+
+        //validate the status code
+        response.then().assertThat().statusCode(200);
+        response.then().assertThat().header("Connection","Keep-Alive");
     }
 }
