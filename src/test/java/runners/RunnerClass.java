@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 //           - if all the step def are there, it will provide green tick
 //           set the value of dryRun=false - to start the actual execution after implementing the missing step
         dryRun = false,
-        tags = "@featurefile",
+        tags = "@test",
         plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
                 "rerun:target/failed.txt"}
         //     {"pretty"} - keyword in cucumber prints all steps in console which we execute

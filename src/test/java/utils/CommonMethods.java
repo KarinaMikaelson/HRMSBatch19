@@ -22,8 +22,8 @@ import java.util.Date;
 public class CommonMethods extends PageInitializer{
     public static WebDriver driver;
     public void openBrowserAndLaunchApplication() throws IOException {
-        switch (ConfigReader.read("browser")){
 
+        switch (ConfigReader.read("browser")){
             case "Chrome":
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
@@ -106,7 +106,9 @@ public class CommonMethods extends PageInitializer{
         }
         return picBytes;  // returning array of byte
     }
+
     public static String getTimeStamp(String pattern){
+
 
         Date date = new Date();
         //yyyy-MM-dd-hh-mm-ss
