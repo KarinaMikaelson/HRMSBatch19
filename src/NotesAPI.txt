@@ -1,0 +1,54 @@
+------------------------------------ Class - 4 API Automation
+Base URI = Base URL + endpoint
+API Automation:
+           Rest Assured:
+                    - to automate API's
+                    - it is a DSL (Domain Specific Language)
+                    - follows BDD approach
+           REST web services
+                    - the rest web services allows us to send data in JSON format
+           JSON format:
+                    - it consists of key and value pair
+
+Rest Assured follows BDD approach
+
+     In Cucumber:
+              Given - pre condition
+              When - actions
+              Then - expected result
+
+     In Rest assured:
+              Given - prepare the request
+              When - sending the request/hitting the endpoint
+              Then - validation of response/expected output
+
+To use json and rest-assured, add dependencies in pom.xml
+
+jsonpath = it returns the keys and values from the path
+
+hamcrest matchers = it is a framework in API which helps us to create matchers for
+body. we use it with junit and with other frameworks.
+
+1. creating the employee
+2. get the employee
+3. update the employee
+4. get updated employee
+
+homework:
+      - getAlljobTitles
+      - getAllEmployee
+
+Rest assured -
+Cucumber -
+
+integrate cucumber with rest assured
+
+feature files - scenarios
+step definitions - write the code for rest assured
+
+Given the request is prepared for creating the employee
+given.
+
+------------------------------------ API HardcodedExamples
+We will write JUST Hardcoded Examples
+   // the intention is to learn how API's works
