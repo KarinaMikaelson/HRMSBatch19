@@ -38,8 +38,6 @@ public class HardcodedExample {
                         "}");
         //hitting the endpoint, sending the request
         Response response = preparedRequest.when().post("/createEmployee.php");
-
-        // System.out.println(response);
         response.prettyPrint();
         //json - keys, it returns the value
         employee_id =  response.jsonPath().getString("Employee.employee_id");
@@ -140,7 +138,6 @@ public class HardcodedExample {
     }
     @Test
     public void fgetAllJobTitles(){
-        ///jobTitle.php
         //prepare the request
         RequestSpecification request = given().
                 header("Content-Type","application/json").
