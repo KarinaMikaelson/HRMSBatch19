@@ -70,6 +70,9 @@ Question - Answer:
    Q: Why prefer RestAssured as a tester?
                     A: Gives you a capability of testing and follows BDD format
 
+   Q: A Library that helps us get info from json Object
+                    A:  jsonPath
+
 ---------------------------------------------
 How can we write the API request?:
 1. Write down each and every piece of code our self.

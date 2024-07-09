@@ -13,7 +13,7 @@ Feature: API testing
       Given a request is prepared for getting an employee
       When a GET call is made to get one employee
       Then the status code will be 200 for this call
-      And the employee ID should be "<employee_id>"
+      And the employee ID should be "110209A"
       And the employee's first name should be "manal"
       And the employee's middle name should be "ms"
       And the employee's last name should be "premium"
@@ -32,7 +32,7 @@ Feature: API testing
         Then the status code will be 200 for this call
         And the connection type will be "Keep-Alive"
 
-       @updateEmployee
+       @api @updateEmployee
       Scenario: updating employee information
         Given a request is prepared for updating an employee with ID "<employee_id>"
         When a PUT call is made for updating employee with the new details

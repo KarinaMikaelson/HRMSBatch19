@@ -1,0 +1,334 @@
+Class 1:
+API
+   Client -the one who makes the request
+   Server - the one who respond to the request
+   API - the one who transfer request and response
+
+Client-server architecture:
+                     OSI model layers:
+                                 - presentation - the layer you see on the screen
+                                 - application - the logic of application that has been written
+                                 - data - the data which is available
+
+
+    1 Tier Architecture:
+              - When all three layers are available at one place,  we call it - 1 Tier Architecture
+                Example: Calculator, notepad, ms paint, worldpad etc.
+                Standalone applications, desktop based application
+
+    2 Tier Architecture:
+              - When the Presentation layer is available at one place,
+                and Application and data layers are available at another place.
+                Example:
+                    mac'd, dominos pizza, walmart etc.
+    3 tier architecture:
+              - When the presentation is available at one place, application layer is available at second place and data layer is available at third place.
+    N-tier architecture:
+              - MMT, Facebook, IG, WhatsApp, Amazon, Ebay etc.
+
+Why do we need API's?
+- to make system developed in different programming languages communicate
+- to enhance the security of the application.
+---------------------------------------------------------------------------------------------
+Class - 2
+ How to plan and test API’s?:
+          Swagger Document:
+                   for API testing, dev team provide us this document
+          Postman:
+                 - Postman is a popular tool used for testing and interacting with APIs (Application Programming Interfaces).
+                 - It provides a user-friendly interface for developers to send HTTP requests to APIs, view responses, and analyze data.
+                 - Postman allows developers to create and manage collections of API requests, automate testing workflows,
+                   and collaborate with team members on API development projects.
+                 - It simplifies the process of working with APIs by providing powerful testing and debugging capabilities in a single application.
+
+What operations we need to perform in API?
+    - CRUD - create, retrieve, update, delete
+
+Why do we need to perform this?
+      - we will test API manually
+
+   - There are API's which are hosted over the internet - Webservices
+   - There are API's which work without the internet - API
+
+   - All the webservices are API's but all the API's are not webservices
+
+Types of web services:
+       - REST - representational state transfer
+       - SOAP - simple object access protocol
+
+difference between rest and soap
+
+We will test REST api'
+
+   - HTTP - hypertext transfer protocol
+     it allows you to communicate with the applications over the internet
+   - CRUD operations - HTTP has its own method
+
+     create - POST
+     retrieve - GET
+     update - PUT
+     delete - DELETE
+
+swagger document:
+         Address Of the server - location of the api - end point
+
+Base URI - BaseURL + end point
+Base URI - hrm.syntaxtechs.net/syntaxapi/api/getOneEmployee.php
+
+Tasks:
+    1. admin user - we need to create this user at first.
+       1. prepare the request ( new request with name in Postman)
+       2. base URL - hrm.syntaxtechs.net/syntaxapi/api/createUser.php
+       3. Type of method:  POST --> click on POST /createUser.php
+       4. payload/body: insert in body --> row --> JSON
+               {
+                 "name": "admin",
+                 "email": "hrmsb19@test.com",
+                 "password": "hrmtest456"
+               }
+       5. in header insert header name --> Parameter --> content type - is the KEY + application/json is the VALUE
+       6. API status code --> to code status we want to see
+                              200 OK  --> succeeded
+                              201 Created  --> succeeded
+              Other code status:
+                       400
+                       401
+                       402
+                       404
+       7. Send -->  200 OK  --> succeeded  OR 201 Created  --> succeeded
+
+token/sessions:
+         - public API private API
+         - private API - authentication and authorization
+
+who are you?
+Are you allowed? show your ID?
+What access you have?
+-----------
+JWT - json web token --> we use
+     - bearer token
+     - mac token
+     - grants token
+
+Generating the token :
+- BaseURI = hrm.syntaxtechs.net/syntaxapi/api/generateToken.php
+- type of method = POST
+- payload/body =
+{
+"email": "hrmsb19@test.com",
+"password*: "hrmtest456"
+}
+header = content-type = application/json
+response code • 200
+---------------------
+token generated:
+      Three parts of one token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk5MDY5NDgsImlzcyI6ImxvY2FsaG9zdCIsImV4cCI6MTcxOTk1MDE0OCwidXNlcklkIjoiNjY4OCJ9.WgttC3vSVBklzUTU7Q9vcrHUrU_yWmALuhn7h8eQzZo
+1. header  -->   eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+2. payload -->   eyJpYXQiOjE3MTk5MDY5NDgsImlzcyI6ImxvY2FsaG9zdCIsImV4cCI6MTcxOTk1MDE0OCwidXNlcklkIjoiNjY4OCJ9.
+3. signature-->  WgttC3vSVBklzUTU7Q9vcrHUrU_yWmALuhn7h8eQzZo
+
+How to de-crept token:
+
+---------------- Created Employee - Postman
+
+Base URI = hrm.syntaxtechs.net/syntaxapi/api/createEmployee.php
+Type of method = POST
+Payload/body
+{
+  "emp_firstname": "Kai",
+  "emp_lastname": "Snow",
+  "emp_middle_name": "Alfie",
+  "emp_gender": "M",
+  "emp_birthday": "1994-10-02",
+  "emp_status": "permanent",
+  "emp_job_title": "QA Manager"
+}
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 201
+
+---------------- Get All Employee - Postman
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- Type of method = GET
+- Payload/body: none
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 201
+
+---------------- Get One Employee - Postman
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- URL = - Base URI = hrm.syntaxtechs.net/syntaxapi/api/getOneEmployee.php
+- Type of method = GET
+- Payload/body: none
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- Insert user id and click checkbox
+- status code in response - 200
+
+---------------- Get Job Title - Postman
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- URL = - Base URI = hrm.syntaxtechs.net/syntaxapi/api/jobTitle.php
+- Type of method = GET
+- Payload/body: none
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 200 OK
+
+---------------- Get Employee Status- Postman
+hrm.syntaxtechs.net/syntaxapi/api/employeementStatus.php
+
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- Type of method = GET
+- Payload/body: none
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 200 ok
+
+---------------- Update Employee- Postman
+/updateEmployee.php
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- URL = - Base URI = hrm.syntaxtechs.net/syntaxapi/api/updateEmployee.php
+- Type of method = PUT
+- Payload/body:
+      {
+        "employee_id": "108864A",
+        "emp_firstname": "Kai",
+        "emp_lastname": "Snow",
+        "emp_middle_name": "ms",
+        "emp_gender": "M",
+        "emp_birthday": "1994-10-02",
+        "emp_status": "permanent",
+        "emp_job_title": "QA Manager"
+      }
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 200 OK
+
+---------------- Update Partial Emplyees Details - Postman
+
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- URL = - Base URI = hrm.syntaxtechs.net/syntaxapi/api/updatePartialEmplyeesDetails.php
+- Type of method = PATCH
+- Payload/body:
+      {
+              "employee_id": "108864A",
+              "emp_firstname": "Kai",
+              "emp_lastname": "Snow",
+              "emp_middle_name": "ms",
+              "emp_gender": "M",
+              "emp_birthday": "1994-10-02",
+              "emp_status": "permanent",
+              "emp_job_title": "QA Manager"
+            }
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 201 Created
+
+---------------- Delete Employee - Postman
+/deleteEmployee.php
+- Base URI = hrm.syntaxtechs.net/syntaxapi/api/
+- URL = - Base URI = hrm.syntaxtechs.net/syntaxapi/api/deleteEmployee.php
+- Type of method = DELETE
+- Payload/body - none
+- Parameters: Insert user id and click checkbox
+- Authorisation --> choose token --> Bearer token --> insert admin token
+- status code in response - 200
+
+
+"Employee": {
+        "employee_id": "108865A",
+        "emp_firstname": "Endie",
+        "emp_middle_name": "ms",
+        "emp_lastname": "Bieber",
+        "emp_birthday": "1936-07-10",
+        "emp_job_title": "QA Engineer",
+        "emp_status": "permanent"
+    }
+------------------------------------------------ CLASS - 3
+how to hardcode base URL:
+- go to  "eye" icon OR Environment
+- if there is no active environment --> create env , name, base URL
+    hrm.syntaxtechs.net/syntaxapi/api
+
+    test your application in different env
+    1. dev
+    2. test/ga
+    3. staging
+    4. production
+
+    we parameterized all the environments
+    we update all the end points (globals)
+
+if I am creating the employee I should get 201 status code
+I should get proper validation message
+I should get exact same values in the body
+I should get proper time also
+
+Assertions
+postman gives you in-built library for the assertions
+
+chai library:
+         - pm - postman object , it allows us different methods for validation
+         - pm.test - to write test
+         - pm.expect - when we expect something to validation
+         - pm.request -
+         - pm.response - in order to get any value from response
+         - pm.globals - if you wish to set any value globally during the request execution
+
+         pm.test ("name of the method", function()){
+         the block of code}
+
+in postman, we can write functions to validate the different fields, status code and time too.
+
+Javascript function, postman used
+
+pm.test ("name of the method", function () {
+    the code you want to validate;
+})
+
+class 4 -
+recap:
+     CRUD operations -
+               create - 201
+               retrieve - 200
+               update - full update - 200 (PUT), partial update 201 (PATCH)
+               delete - 200
+we keep all the requests in postman under collection.
+to perform validations of request, we should write tests in postman.
+
+chai assertion library (javascript language)
+                  pm - postman object
+                  pm.test to write test
+                  pm.expect - when we expect something to validation pm.request -
+                  pm.response - in order to get any value from response
+                  pm-globals - if you wish to set any value globally during the request execution
+                  pm.test ("name of the method", function()){
+the block of code}
+
+we can validate - status code
+actual time of execution
+any value in the response body
+any key in the response body
+any string in the response body
+any headers in the response body
+
+--------------------------------------API REVIEW with Moazam
+1. Create Blank collection --> name it
+2. Create new request --> name it
+
+----------------------------------------------------- API Automation - Converting Rest Assured API tests to the Cucumber BDD style test----- Class-4 Sohel
+
+API Automation:
+           Rest Assured:
+                    - to automate API's
+                    - it is a DSL (Domain Specific Language)
+                    - follows BDD approach
+           REST web services
+                    - the rest web services allows us to send data in JSON format
+           JSON format:
+                    - it consists of key and value pair
+
+Rest Assured follows BDD approach
+
+     In Cucumber:
+              Given - pre condition
+              When - actions
+              Then - expected result
+
+     In Rest assured:
+              Given - prepare the request
+              When - sending the request/hitting the endpoint
+              Then - validation of response/expected output
