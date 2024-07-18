@@ -332,3 +332,36 @@ Rest Assured follows BDD approach
               Given - prepare the request
               When - sending the request/hitting the endpoint
               Then - validation of response/expected output
+
+----------------------------------------------------- Class - 6 Recap with Sohel, Integrating Rest-Assured with Cucumber
+Recap:
+    - integrated Rest assured with cucumber
+baseURI = baseURL (because we send endpoint separately)
+
+we created separate API steps package
+we have added API constants class here to pass all the endpoints and headers
+
+
+
+-----------------
+   body("{\n" +
+                        "  \"emp_firstname\": \"manal\",\n" +
+                        "  \"emp_lastname\": \"premium\",\n" +
+                        "  \"emp_middle_name\": \"ms\",\n" +
+                        "  \"emp_gender\": \"F\",\n" +
+                        "  \"emp_birthday\": \"1976-06-16\",\n" +
+                        "  \"emp_status\": \"permanent\",\n" +
+                        "  \"emp_job_title\": \"QA Manager\"\n" +
+                        "}");
+
+
+
+-----------------------------------------------------
+
+
+
+
+
+
+
+

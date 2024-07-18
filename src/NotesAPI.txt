@@ -78,8 +78,9 @@ How can we write the API request?:
 1. Write down each and every piece of code our self.
 2. We use libraries that can help us make these calls.
 
-
-
+  RestAssured (IntelliJ):
+  1. Set Base URL ( do it once)
+  2.
 
 
 

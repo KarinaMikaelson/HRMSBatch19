@@ -2,47 +2,37 @@ Feature: API testing
   Background:
     Given a JWT bearer token is generated
 
-  @api @createAnEmployee
+  @api
   Scenario: creating an employee
     Given a request is prepared for creating an employee
     When a POST call is made to create the employee
     Then the status code will be 201 for this call
+    And the employee created contains key "Message" and value "Employee Created"
+    And the employee id "Employee.employee_id" is stored as a global variable
 
-    @api @getOneEmployee
-    Scenario: getting one employee
-      Given a request is prepared for getting an employee
-      When a GET call is made to get one employee
-      Then the status code will be 200 for this call
-      And the employee ID should be "110209A"
-      And the employee's first name should be "manal"
-      And the employee's middle name should be "ms"
-      And the employee's last name should be "premium"
+  @api
+  Scenario: Retrieving recently created employee
+    Given a request is prepared for retrieving an employee
+    When a GET call is made to get the employee
+    Then the status code for this will be 200
+    And the employee id we got "employee.employee_id" must match with global id
+    And the received data from "employee" object matches with the data we used to create employee
+      |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
+      |manal        |premium     |ms             |Female    |1976-06-16  |permanent |QA manager   |
 
-      @api @getAllEmployees
-      Scenario: getting all employees
-        Given a request is prepared for getting all employees
-        When a GET call is made to get all employees
-        Then the status code will be 200 for this call
-        And the connection type will be "Keep-Alive"
 
-      @api @getJobTitles
-      Scenario: getting all job titles
-        Given a request is prepared for getting all job titles
-        When a GET call is made to get all job titles
-        Then the status code will be 200 for this call
-        And the connection type will be "Keep-Alive"
+  @jsonpayload @api
+  Scenario: Create employee using json payload
+    Given a request is prepared for creating an employee using json payload
+    When a POST call is made to create the employee
+    Then the status code will be 201 for this call
+    And the employee created contains key "Message" and value "Employee Created"
+    And the employee id "Employee.employee_id" is stored as a global variable
 
-       @api @updateEmployee
-      Scenario: updating employee information
-        Given a request is prepared for updating an employee with ID "<employee_id>"
-        When a PUT call is made for updating employee with the new details
-          | firstName | lastName | middleName | gender | birthday   | status    | jobTitle |
-          | Dmytro     | pedrick   | sm          | M      | 2001-06-29 | temporary | admin     |
-        Then the status code will be 200 for this call
-        And the employee's updated first name should be "Dmytro"
-        And the employee's updated last name should be "pedrick"
-        And the employee's updated middle name should be "sm"
-        And the employee's updated gender should be "M"
-        And the employee's updated birthday should be "2001-06-29"
-        And the employee's updated status should be "temporary"
-        And the employee's updated job title should be "admin"
+  @dynamic @api
+  Scenario: Create employee using json dynamic payload
+    Given a request is prepared for creating an employee using json payload dynamic "manal" , "premium" , "ms" , "F" , "1976-06-16" , "permanent" , "QA Manager"
+    When a POST call is made to create the employee
+    Then the status code will be 201 for this call
+    And the employee created contains key "Message" and value "Employee Created"
+    And the employee id "Employee.employee_id" is stored as a global variable
